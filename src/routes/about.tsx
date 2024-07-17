@@ -103,9 +103,7 @@ export default function About() {
                         text: '线下实验招募平台',
                         content: (
                             <p>
-                                正在开发，详见
-                                <Link path='/product/essai'>网站</Link>
-                                。这项产品的主要目的是填补并改良
+                                正在开发。这项产品的主要目的是填补并改良
                                 <Link path='https://naodao.com'>脑岛平台</Link>
                                 的空缺，脑岛专注于线上实验数据收集，而我们更关心线下实验。
                             </p>

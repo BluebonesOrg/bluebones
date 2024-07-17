@@ -30,11 +30,12 @@ export function List(p: { type: 'ul' | 'ol'; items: ListItem[] }) {
         </Dynamic>
     );
 }
-export function Link(p: {
+export function Link(_p: {
     class?: string;
-    path: string;
+    path?: string;
     children?: JSX.Element;
 }) {
+    const p = mergeProps({ path: '/404' }, _p);
     return (
         <a
             class={p.class}

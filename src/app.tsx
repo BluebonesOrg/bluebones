@@ -1,11 +1,13 @@
 import { mdiHeart, mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
-import { A, RouteSectionProps, Router } from '@solidjs/router';
+import { A, Router, RouteSectionProps } from '@solidjs/router';
 import { FileRoutes } from '@solidjs/start/router';
-import { For, JSX, Suspense } from 'solid-js';
+import { For, JSX, onMount, Suspense } from 'solid-js';
 import './app.css';
+import { Link } from './components/Article';
 import Btn from './components/Btn';
 import Icon from './components/Icon';
 import { nav } from './ts/const';
+import { useLocation } from './ts/util';
 
 function Menu(p: {
     items?: {
@@ -19,7 +21,7 @@ function Menu(p: {
             <For each={p.items}>
                 {(e) => (
                     <li>
-                        <a href={e.path}>{e.text}</a>
+                        <Link path={e.path}>{e.text}</Link>
                     </li>
                 )}
             </For>
@@ -36,11 +38,10 @@ function Panel(p: { text: string; desc: string }) {
 }
 function LeftBtn(p: {
     text: string;
-    path: string;
     items: { text: string; desc?: string; path: string }[];
 }) {
     return (
-        <div class='dropdown dropdown-hover'>
+        <div class='dropdown'>
             <Btn {...p}></Btn>
             <Menu
                 items={p.items.map(({ text, desc, path }) => ({
@@ -78,7 +79,7 @@ function Topbar() {
                         <Icon class='swap-on'>{mdiWeatherNight}</Icon>
                     </label>
                 </Btn>
-                {/* <div class='dropdown dropdown-hover dropdown-end'>
+                {/* <div class='dropdown dropdown-end'>
                     <Btn class='btn-square' icon={mdiTranslate}></Btn>
                     <Menu items={[{ text: '简体中文' }]}></Menu>
                 </div> */}
@@ -118,10 +119,12 @@ function App(p: RouteSectionProps) {
     );
 }
 export default function () {
-    import.meta.env.DEV
-        ? console.log('routes', FileRoutes())
-        : console.log(
-              `%c
+    onMount(() => {
+        const location = useLocation();
+        import.meta.env.DEV
+            ? console.log('routes', FileRoutes())
+            : console.log(
+                  `%c
            *=+++==#
          %+=+++=+%
         #==++==*
@@ -138,11 +141,10 @@ export default function () {
           #+=++==*
          *=+++++%
 `,
-              'color:#03a9f4;margin-left:10rem;',
-              `\n都来这了，不考虑加入我们吗？ ${
-                  new URL(import.meta.url).origin
-              }/join`,
-          );
+                  'color:#03a9f4;margin-left:10rem;',
+                  `\n都来这了，不考虑加入我们吗？ ${location().origin}/join`
+              );
+    });
     return (
         <Router root={App}>
             <FileRoutes />

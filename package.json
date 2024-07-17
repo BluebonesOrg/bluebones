@@ -8,7 +8,8 @@
     "scripts": {
         "dev": "vinxi dev",
         "build": "vinxi build",
-        "start": "vinxi start"
+        "start": "vinxi start",
+        "preview": "node .output/server/index.mjs"
     },
     "dependencies": {
         "@mdi/js": "^7.4.47",

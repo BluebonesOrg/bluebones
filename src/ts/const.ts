@@ -1,24 +1,26 @@
 export const nav = [
     {
         text: '产品',
-        path: '/product',
         items: [
             {
                 text: 'Essai',
-                path: '/product/essai',
+                path: `https://essai.bluebones.fun`,
                 desc: '线下实验招募平台',
             },
             {
                 text: 'WPS-Paper',
-                path: '/product/wps-paper',
-                link: 'https://github.com/Cubxx/wps-paper',
+                path: 'https://github.com/Cubxx/wps-paper',
                 desc: '辅助论文写作的WPS加载项',
+            },
+            {
+                text: 'ptbk',
+                path: 'https://github.com/Cubxx/PTB-Toolkit',
+                desc: 'PsychToolbox 开发框架',
             },
         ],
     },
     {
         text: '认识我们',
-        path: '/about',
         items: [
             {
                 text: '团队',
@@ -30,19 +32,14 @@ export const nav = [
                 path: '/join',
                 desc: '和我们一起探索科研工作的未来形态',
             },
-            {
-                text: '捐助',
-                path: '/donate',
-                desc: '共同促进脑科学发展',
-            },
+            { text: '捐助', path: '/donate', desc: '共同促进脑科学发展' },
         ],
     },
     {
         text: '联系我们',
-        path: 'https://qm.qq.com/q/214gmxUVKw',
         items: [
             { text: 'QQ', path: 'https://qm.qq.com/q/214gmxUVKw' },
-            { text: 'Github', path: 'https://github.com/Cubxx' },
+            { text: 'Github', path: 'https://github.com/BluebonesOrg' },
             { text: '爱发电', path: 'https://afdian.net/a/bluebones' },
         ],
     },

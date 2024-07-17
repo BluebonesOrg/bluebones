@@ -12,11 +12,6 @@ function Guide(p: { text: string; path: string; desc: string }) {
     );
 }
 export default function NotFound() {
-    const guides: Props<typeof Guide>[] = [
-        { text: '了解', path: '/about', desc: '一个学生主导的非营利性团体' },
-        { text: '产品', path: '/product', desc: '让您更高效地工作' },
-        { text: '捐助', path: '/donate', desc: '以推动脑科学科研工作流的改革' },
-    ];
     return (
         <div class='hero h-full'>
             <div class='hero-content flex-col items-start'>
@@ -40,7 +35,27 @@ export default function NotFound() {
                 </div>
                 <div class='divider divider-neutral'></div>
                 <ol>
-                    <For each={guides}>{Guide}</For>
+                    <For
+                        each={[
+                            {
+                                text: '了解',
+                                path: '/about',
+                                desc: '一个学生主导的非营利性团体',
+                            },
+                            {
+                                text: '产品',
+                                path: '/product',
+                                desc: '让您更高效地工作',
+                            },
+                            {
+                                text: '捐助',
+                                path: '/donate',
+                                desc: '以推动脑科学科研工作流的改革',
+                            },
+                        ]}
+                    >
+                        {Guide}
+                    </For>
                 </ol>
             </div>
         </div>
