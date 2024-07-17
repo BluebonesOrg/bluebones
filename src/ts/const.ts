@@ -9,12 +9,12 @@ export const nav = [
             },
             {
                 text: 'WPS-Paper',
-                path: 'https://github.com/Cubxx/wps-paper',
+                path: 'https://github.com/BluebonesOrg/wps-paper',
                 desc: '辅助论文写作的WPS加载项',
             },
             {
                 text: 'ptbk',
-                path: 'https://github.com/Cubxx/PTB-Toolkit',
+                path: 'https://github.com/BluebonesOrg/ptbk',
                 desc: 'PsychToolbox 开发框架',
             },
         ],
@@ -32,15 +32,31 @@ export const nav = [
                 path: '/join',
                 desc: '和我们一起探索科研工作的未来形态',
             },
-            { text: '捐助', path: '/donate', desc: '共同促进脑科学发展' },
+            {
+                text: '捐助',
+                path: '/donate',
+                desc: '共同促进脑科学发展',
+            },
         ],
     },
     {
         text: '联系我们',
         items: [
-            { text: 'QQ', path: 'https://qm.qq.com/q/214gmxUVKw' },
-            { text: 'Github', path: 'https://github.com/BluebonesOrg' },
-            { text: '爱发电', path: 'https://afdian.net/a/bluebones' },
+            {
+                text: 'QQ',
+                path: 'https://qm.qq.com/q/214gmxUVKw',
+                desc: '',
+            },
+            {
+                text: 'Github',
+                path: 'https://github.com/BluebonesOrg',
+                desc: '',
+            },
+            {
+                text: '爱发电',
+                path: 'https://afdian.net/a/bluebones',
+                desc: '',
+            },
         ],
     },
 ] as const;

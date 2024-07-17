@@ -15,9 +15,13 @@ export function H(p: ParentProps<{ level: 1 | 2 | 3 }>) {
     );
 }
 type ListItem = { text?: string; desc?: string; content?: JSX.Element };
-export function List(p: { type: 'ul' | 'ol'; items: ListItem[] }) {
+export function List(p: {
+    class?: string;
+    type: 'ul' | 'ol';
+    items: ListItem[];
+}) {
     return (
-        <Dynamic component={p.type}>
+        <Dynamic component={p.type} class={p.class}>
             <For each={p.items}>
                 {(e) => (
                     <li>
@@ -48,7 +52,7 @@ export function Link(_p: {
 }
 export function Article(p: ParentProps) {
     return (
-        <article class='prose prose-sm md:prose-base max-w-none my-12 mx-20'>
+        <article class='prose prose-sm md:prose-base max-w-none my-12 mx-5 md:mx-20'>
             {p.children}
         </article>
     );

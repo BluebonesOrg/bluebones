@@ -4,7 +4,7 @@ import { mergeStyleProps } from '~/ts/util';
 
 export function T(p: ParentProps) {
     return (
-        <h1 class='text-5xl text-center lg:text-left font-bold leading-tight pb-6'>
+        <h1 class='text-5xl text-center md:text-left font-bold leading-tight pb-6'>
             {p.children}
         </h1>
     );
@@ -14,7 +14,7 @@ export function P(p: ParentProps) {
 }
 export function Actions(p: { items: Props<typeof Btn>[] }) {
     return (
-        <div class='flex justify-center lg:justify-start'>
+        <div class='flex justify-center md:justify-start'>
             <For each={p.items}>
                 {(e) => (
                     <Btn
@@ -32,7 +32,7 @@ export function Block(p: ParentProps<{ class?: string }>) {
         <div
             class={[
                 'h-screen first:h-[calc(100vh-4rem)]',
-                'py-10 px-4 md:px-20',
+                'py-12 px-5 md:px-20',
                 'flex flex-col justify-center',
                 p.class ?? '',
             ].join(' ')}

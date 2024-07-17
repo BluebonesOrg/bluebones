@@ -7,10 +7,10 @@ export default function Donate() {
     let modalRef!: HTMLDialogElement;
     return (
         <div>
-            <Block class='lg:mx-60'>
+            <Block class='2xl:mx-60'>
                 <T>加入我们</T>
                 <P>
-                    蓝骨头还处于初期阶段，有限的成员数限制着产品开发速度，我们需要有共同理念的朋友加入。
+                    蓝骨头还处于初期阶段，有限的成员数限制着产品开发速度，我们需要有共同理念的伙伴加入。
                     <br />
                     我们要打造一套高效、协作、开放的科研产品生态，让科研工作者把时间更多地花在思考上。
                     <br />

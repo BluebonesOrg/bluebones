@@ -5,4 +5,4 @@ export default function (p: { href: string | ((e: Location) => string) }) {
         location.href = typeof p.href === 'string' ? p.href : p.href(location);
     });
     return null;
-};
+}

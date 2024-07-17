@@ -12,7 +12,7 @@ function MemberCard(
         link: string;
         bg: string[];
         content: string;
-    }>,
+    }>
 ) {
     return (
         <div class='card border-base-content/5 card-compact border-4 text-start'>
@@ -53,7 +53,7 @@ export default function About() {
             avatar: `https://avatars.githubusercontent.com/u/128892816?v=4&size=${size()}`,
             link: 'https://github.com/gtouck',
             bg: ['上海海事大学-计算机-本科', '全栈工程师'],
-            content: '',
+            content: '等文案...',
         },
         {
             name: '王晓冉',
@@ -82,7 +82,9 @@ export default function About() {
         <Article>
             <H level={2}>成员介绍</H>
             <p>
-                如您所见，我们是一个年轻的团队，我们需要您的
+                如您所见，我们是一个年轻的团队。
+                <br />
+                我们需要您的
                 <a href='/join'>加入</a>。
             </p>
             <div

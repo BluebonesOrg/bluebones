@@ -1,8 +1,8 @@
-import { Navigate } from '@solidjs/router';
+import Redirect from '~/components/Redirect';
 import { nav } from '~/ts/const';
 
 export default () => (
-    <Navigate
+    <Redirect
         href={nav.find((e) => e.text === '产品')?.items[0].path ?? '/404'}
-    ></Navigate>
+    ></Redirect>
 );

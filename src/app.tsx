@@ -1,9 +1,14 @@
-import { mdiHeart, mdiWeatherNight, mdiWhiteBalanceSunny } from '@mdi/js';
+import {
+    mdiHeart,
+    mdiMenu,
+    mdiWeatherNight,
+    mdiWhiteBalanceSunny,
+} from '@mdi/js';
 import { A, Router, RouteSectionProps } from '@solidjs/router';
 import { FileRoutes } from '@solidjs/start/router';
 import { For, JSX, onMount, Suspense } from 'solid-js';
 import './app.css';
-import { Link } from './components/Article';
+import { Link, List } from './components/Article';
 import Btn from './components/Btn';
 import Icon from './components/Icon';
 import { nav } from './ts/const';
@@ -53,22 +58,52 @@ function LeftBtn(p: {
     );
 }
 function Topbar() {
+    const MiniNav = () => (
+        <div class='dropdown md:hidden'>
+            <Btn class='btn-square no-space'>
+                <Icon>{mdiMenu}</Icon>
+            </Btn>
+            <ul class='dropdown-content menu bg-base-200 rounded-box shadow w-max'>
+                <For each={nav as DeepNonReadonly<typeof nav>}>
+                    {(e) => (
+                        <li>
+                            <strong>{e.text}</strong>
+                            <ul>
+                                <For each={e.items}>
+                                    {(e) => (
+                                        <li>
+                                            <Link path={e.path}>{e.text}</Link>
+                                        </li>
+                                    )}
+                                </For>
+                            </ul>
+                        </li>
+                    )}
+                </For>
+            </ul>
+        </div>
+    );
     return (
         <>
-            <div class='flex-1'>
+            <div class='navbar-start'>
+                <MiniNav />
                 <A
                     href='/'
                     class='btn btn-ghost font-title text-base-content text-lg md:text-2xl'
                 >
                     蓝骨头
                 </A>
-                <For each={nav as DeepNonReadonly<typeof nav>}>{LeftBtn}</For>
+                <div class='hidden md:flex'>
+                    <For each={nav as DeepNonReadonly<typeof nav>}>
+                        {LeftBtn}
+                    </For>
+                </div>
             </div>
-            <div class='flex-none'>
+            <div class='navbar-end'>
                 <Btn path='/donate'>
                     <Icon class='fill-red-500'>{mdiHeart}</Icon>捐助
                 </Btn>
-                <Btn class='btn-square ml-0'>
+                <Btn class='btn-square no-space'>
                     <label class='swap swap-rotate'>
                         <input
                             type='checkbox'
@@ -83,11 +118,11 @@ function Topbar() {
                     <Btn class='btn-square' icon={mdiTranslate}></Btn>
                     <Menu items={[{ text: '简体中文' }]}></Menu>
                 </div> */}
-                <div class='dropdown dropdown-hover dropdown-end'>
+                <div class='dropdown dropdown-hover dropdown-end mr-2'>
                     <Btn
+                        class='btn-circle avatar'
                         path='/user'
                         img='https://picsum.photos/1'
-                        class='btn-circle avatar'
                     ></Btn>
                     {import.meta.env.DEV && (
                         <Menu

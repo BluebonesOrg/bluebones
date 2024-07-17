@@ -15,6 +15,7 @@ function Document(props: DocumentComponentProps) {
                 />
                 <link rel='icon' href='/icon/favicon.ico' />
                 {props.assets}
+                <title>Bluebones - 脑科学的下一代工作流</title>
             </head>
             <body>
                 <div id='app'>{props.children}</div>

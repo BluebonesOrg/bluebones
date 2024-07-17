@@ -11,7 +11,7 @@ export default function (
         img: string;
         onClick: (e: MouseEvent) => void;
         children: JSX.Element;
-    }>,
+    }>
 ) {
     const children = () => (
         <>

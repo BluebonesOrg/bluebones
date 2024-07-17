@@ -1,12 +1,12 @@
 import { mdiWechat } from '@mdi/js';
 import img from '~/assets/wx_reward.png';
-import { Actions, Block, T, P } from '~/components/Block';
+import { Actions, Block, P, T } from '~/components/Block';
 
 export default function Donate() {
     let modalRef!: HTMLDialogElement;
     return (
         <div>
-            <Block class='lg:mx-60'>
+            <Block class='2xl:mx-60'>
                 <T>向我们捐助</T>
                 <P>
                     蓝骨头正在推动脑科学科研工作流的改革，以此促进脑科学的发展。
