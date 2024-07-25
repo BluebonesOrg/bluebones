@@ -108,7 +108,7 @@ function Topbar() {
                         <input
                             type='checkbox'
                             class='theme-controller'
-                            value='black'
+                            value='sunset'
                         />
                         <Icon class='swap-off'>{mdiWhiteBalanceSunny}</Icon>
                         <Icon class='swap-on'>{mdiWeatherNight}</Icon>

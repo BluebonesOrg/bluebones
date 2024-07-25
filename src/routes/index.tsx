@@ -39,7 +39,7 @@ export default function Home() {
                     ></Actions>
                     <br class='h-8'></br>
                 </Block>
-                <Block class='bg-primary'>
+                <Block class='bg-primary text-primary-content'>
                     <T>从 idea 到 paper 有多长</T>
                     <P>
                         收集文献、实验设计、数据收集、数据分析、制作图表、文字撰写、内容排版...
@@ -55,7 +55,7 @@ export default function Home() {
                         比起那些硬核且专业的软件，我们的优势是简单且高效。
                     </P>
                 </Block>
-                <Block class='bg-secondary'>
+                <Block class='bg-secondary text-secondary-content'>
                     <T>开放的产品生态</T>
                     <P>
                         蓝骨头是非营利性组织，我们所作的一切是为了学科发展，而不是利润。

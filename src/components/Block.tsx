@@ -19,7 +19,7 @@ export function Actions(p: { items: Props<typeof Btn>[] }) {
                 {(e) => (
                     <Btn
                         {...mergeStyleProps(e, {
-                            class: 'first:bg-primary',
+                            class: 'first:bg-primary first:text-primary-content',
                         })}
                     />
                 )}
