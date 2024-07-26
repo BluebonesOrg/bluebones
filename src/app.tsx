@@ -8,11 +8,10 @@ import { A, Router, RouteSectionProps } from '@solidjs/router';
 import { FileRoutes } from '@solidjs/start/router';
 import { For, JSX, onMount, Suspense } from 'solid-js';
 import './app.css';
-import { Link, List } from './components/Article';
+import { Link } from './components/Article';
 import Btn from './components/Btn';
 import Icon from './components/Icon';
 import { nav } from './ts/const';
-import { useLocation } from './ts/util';
 
 function Menu(p: {
     items?: {
@@ -155,7 +154,6 @@ function App(p: RouteSectionProps) {
 }
 export default function () {
     onMount(() => {
-        const location = useLocation();
         import.meta.env.DEV
             ? console.log('routes', FileRoutes())
             : console.log(
@@ -177,7 +175,7 @@ export default function () {
          *=+++++%
 `,
                   'color:#03a9f4;margin-left:10rem;',
-                  `\n都来这了，不考虑加入我们吗？ ${location().origin}/join`
+                  `\n都来这了，不考虑加入我们吗？ ${window.location.origin}/join`,
               );
     });
     return (

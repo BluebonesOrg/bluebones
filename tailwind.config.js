@@ -10,9 +10,6 @@ export default {
     },
     plugins: [typography, daisyui],
     daisyui: {
-        themes: [
-            'cupcake',
-            'sunset',
-        ],
+        themes: ['cupcake', 'sunset'],
     },
 };

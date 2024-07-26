@@ -1,5 +1,11 @@
 import _ from 'lodash-es';
-import { createEffect, createSignal, onCleanup, onMount } from 'solid-js';
+import {
+    createEffect,
+    createSignal,
+    onCleanup,
+    onMount,
+    Signal,
+} from 'solid-js';
 import { breakpoints } from './const';
 
 export function mergeStyleProps(...ps: StyleProps[]): NormalizedStyleProps {
@@ -36,7 +42,7 @@ export function mergeStyleProps(...ps: StyleProps[]): NormalizedStyleProps {
 export function useEventListener(
     el: EventTarget,
     type: string,
-    callback: (e: Event) => void
+    callback: (e: Event) => void,
 ) {
     import.meta.env.DEV && console.log('事件监听', type);
     el.addEventListener(type, callback, true);
@@ -60,7 +66,7 @@ export function useBreakpoint() {
                     query,
                     'change',
                     //@ts-ignore
-                    (e: MediaQueryListEvent) => setBreakpoint(e.matches)
+                    (e: MediaQueryListEvent) => setBreakpoint(e.matches),
                 );
             });
             return breakpoint;
@@ -70,8 +76,11 @@ export function useBreakpoint() {
         readonly [K in keyof typeof breakpoints]: () => boolean;
     };
 }
-export function useLocation() {
-    const [location, setLocation] = createSignal(window.location);
-    useEventListener(window, 'popstate', () => setLocation(window.location));
-    return location;
+export function useLocalStorage<T>(key: string, defaultValue: T): Signal<T> {
+    const v = localStorage.getItem(key);
+    const [value, setValue] = createSignal<T>(v ? JSON.parse(v) : defaultValue);
+    createEffect(() => {
+        localStorage.setItem(key, JSON.stringify(value()));
+    });
+    return [value, setValue];
 }
