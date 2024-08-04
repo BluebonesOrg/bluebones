@@ -12,6 +12,7 @@ import { Link } from './components/Article';
 import Btn from './components/Btn';
 import Icon from './components/Icon';
 import { nav } from './ts/const';
+import { useMatchMedia } from './ts/util';
 
 function Menu(p: {
     items?: {
@@ -82,6 +83,23 @@ function Topbar() {
             </ul>
         </div>
     );
+    function ThemeBtn() {
+        const isDark = useMatchMedia('(prefers-color-scheme: dark)');
+        return (
+            <Btn class='btn-square no-space'>
+                <label class='swap swap-rotate'>
+                    <input
+                        type='checkbox'
+                        class='theme-controller'
+                        value='sunset'
+                        checked={isDark()}
+                    />
+                    <Icon class='swap-off'>{mdiWhiteBalanceSunny}</Icon>
+                    <Icon class='swap-on'>{mdiWeatherNight}</Icon>
+                </label>
+            </Btn>
+        );
+    }
     return (
         <>
             <div class='navbar-start'>
@@ -102,17 +120,7 @@ function Topbar() {
                 <Btn path='/donate'>
                     <Icon class='fill-red-500'>{mdiHeart}</Icon>捐助
                 </Btn>
-                <Btn class='btn-square no-space'>
-                    <label class='swap swap-rotate'>
-                        <input
-                            type='checkbox'
-                            class='theme-controller'
-                            value='sunset'
-                        />
-                        <Icon class='swap-off'>{mdiWhiteBalanceSunny}</Icon>
-                        <Icon class='swap-on'>{mdiWeatherNight}</Icon>
-                    </label>
-                </Btn>
+                <ThemeBtn />
                 {/* <div class='dropdown dropdown-end'>
                     <Btn class='btn-square' icon={mdiTranslate}></Btn>
                     <Menu items={[{ text: '简体中文' }]}></Menu>

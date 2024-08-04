@@ -1,4 +1,4 @@
-import _ from 'lodash-es';
+import { map, mapValues } from 'lodash-es';
 import {
     createEffect,
     createSignal,
@@ -17,11 +17,11 @@ export function mergeStyleProps(...ps: StyleProps[]): NormalizedStyleProps {
         if (p.classList) {
             _p.class =
                 (_p.class ??= '') +
-                _.map(p.classList, (v, k) => (v ? k : '')).join(' ');
+                map(p.classList, (v, k) => (v ? k : '')).join(' ');
             delete p.classList;
         }
         if (typeof p.style === 'object') {
-            _p.style = _.map(p.style, (v, k) => `${k}:${v}`).join(';');
+            _p.style = map(p.style, (v, k) => `${k}:${v}`).join(';');
         }
         return _p;
     }
@@ -39,37 +39,42 @@ export function mergeStyleProps(...ps: StyleProps[]): NormalizedStyleProps {
 }
 
 //hooks
+export function useEventListener<K extends keyof WindowEventMap>(
+    el: Window,
+    name: K,
+    listener: (e: WindowEventMap[K]) => void,
+): void;
 export function useEventListener(
     el: EventTarget,
-    type: string,
-    callback: (e: Event) => void,
+    name: string,
+    listener: <T extends Event>(e: T) => void,
 ) {
-    import.meta.env.DEV && console.log('事件监听', type);
-    el.addEventListener(type, callback, true);
+    import.meta.env.DEV && console.log('事件监听', name);
+    el.addEventListener(name, listener, true);
     onCleanup(() => {
-        import.meta.env.DEV && console.log('事件取消', type);
-        el.removeEventListener(type, callback);
+        import.meta.env.DEV && console.log('事件取消', name);
+        el.removeEventListener(name, listener);
     });
 }
+export function useMatchMedia(query: string) {
+    const [matches, setMatches] = createSignal(false);
+    onMount(() => {
+        const mql = window.matchMedia(query);
+        setMatches(mql.matches);
+        //@ts-ignore
+        useEventListener(mql, 'change', (e: MediaQueryListEvent) =>
+            setMatches(e.matches),
+        );
+    });
+    return matches;
+}
 export function useBreakpoint() {
-    const getters = _.mapValues(breakpoints, (v, k) => ({
+    const getters = mapValues(breakpoints, (v, k) => ({
         get() {
-            const [breakpoint, setBreakpoint] = createSignal(false);
+            const matches = useMatchMedia(`(min-width: ${v}px)`);
             import.meta.env.DEV &&
-                createEffect(() => console.log('breakpoint', k, breakpoint()), {
-                    lazy: true,
-                });
-            onMount(() => {
-                const query = window.matchMedia(`(min-width: ${v}px)`);
-                setBreakpoint(query.matches);
-                useEventListener(
-                    query,
-                    'change',
-                    //@ts-ignore
-                    (e: MediaQueryListEvent) => setBreakpoint(e.matches),
-                );
-            });
-            return breakpoint;
+                createEffect(() => console.log('breakpoint', k, matches()));
+            return matches;
         },
     }));
     return Object.defineProperties({}, getters) as {
