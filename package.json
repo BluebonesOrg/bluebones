@@ -1,0 +1,32 @@
+{
+  "name": "bluebones",
+  "author": "Cubxx",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "vinxi dev",
+    "build": "vinxi build",
+    "start": "vinxi start",
+    "preview": "node .output/server/index.mjs"
+  },
+  "dependencies": {
+    "@mdi/js": "^7.4.47",
+    "@solidjs/router": "^0.13.6",
+    "@solidjs/start": "^1.0.2",
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
+    "solid-js": "^1.8.17",
+    "vinxi": "^0.3.12"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.13",
+    "@types/lodash-es": "^4.17.12",
+    "autoprefixer": "^10.4.19",
+    "daisyui": "^4.12.10",
+    "postcss": "^8.4.38",
+    "rollup-plugin-visualizer": "^5.12.0",
+    "tailwindcss": "^3.4.3"
+  }
+}

@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    @apply lg:text-lg;
+    @apply tracking-wider;
+    @apply scroll-smooth;
+}
+
+.no-space {
+    @apply m-0 !important;
+    @apply p-0 !important;
+}
