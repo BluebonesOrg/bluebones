@@ -1,0 +1,49 @@
+name: cd
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: 1.1.20
+        # uses: actions/setup-node@v4
+        # with:
+        #     node-version: 18
+        #     cache: npm
+      - name: Install dependencies
+        run: bun i
+      - name: Build
+        run: bun run build
+      - name: Deploy
+        uses: easingthemes/ssh-deploy@v5.0.3
+        with:
+          REMOTE_HOST: ${{ secrets.SERVER_HOST }}
+          REMOTE_USER: ${{ secrets.SERVER_USERNAME }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SOURCE: '.output/'
+          TARGET: ${{ secrets.WORKSPACE }}
+          ARGS: '-avz --delete'
+          SCRIPT_AFTER: |
+            cd ${{ secrets.WORKSPACE }}
+            node server/index.mjs
+
+  del_runs:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: read
+    steps:
+      - name: Delete workflow runs
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          retain_days: 0
+          keep_minimum_runs: 6
