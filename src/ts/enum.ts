@@ -1,4 +1,4 @@
-import { mdiGithub, mdiHeart, mdiQqchat } from '@mdi/js';
+import { mdiGithub, mdiHeart, mdiXml } from '@mdi/js';
 import { t } from './util';
 
 const unique = Symbol();
@@ -46,33 +46,14 @@ export function toEnum<const T extends ItemKD[]>(...config: T) {
 
 export const Links = toEnum(
   [
-    'projects',
+    'contribute',
     {
       get text() {
-        return t('btn:projects');
+        return t('btn:contribute');
       },
       desc: '',
-      path: 'projects',
-    },
-  ],
-  [
-    'about',
-    {
-      get text() {
-        return t('btn:about');
-      },
-      desc: '',
-      path: 'about',
-    },
-  ],
-  [
-    'join',
-    {
-      get text() {
-        return t('join.title');
-      },
-      desc: '',
-      path: 'join',
+      path: 'contribute',
+      icon: mdiXml,
     },
   ],
   [
@@ -84,15 +65,6 @@ export const Links = toEnum(
       desc: '',
       path: 'donate',
       icon: mdiHeart,
-    },
-  ],
-  [
-    'QQ',
-    {
-      text: 'QQ',
-      desc: '',
-      path: 'https://qm.qq.com/q/214gmxUVKw',
-      icon: mdiQqchat,
     },
   ],
   [

@@ -1,4 +1,4 @@
-import { Component, JSX } from 'solid-js';
+import { JSX } from 'solid-js';
 
 declare global {
   type StyleProps = Pick<
@@ -8,7 +8,6 @@ declare global {
   type NormalizedStyleProps = { class?: string; style?: string };
 
   // util
-  type Props<T> = T extends Component<infer P> ? P : never;
   type NonReadonly<T extends {}> = {
     -readonly [P in keyof T]: T[P];
   };

@@ -1,23 +1,23 @@
 import { A } from '@solidjs/router';
-import { createMemo, For, JSX } from 'solid-js';
-import { twMerge } from 'tailwind-merge';
+import { ComponentProps, createMemo, For, JSX } from 'solid-js';
+import { cn } from '~/ts/util';
 import { Icon } from './icon';
 
-export function Link(p: {
+export const Link = (p: {
   path: string;
   class?: string;
   children?: JSX.Element;
-}) {
+}) => {
   return (
     <A
-      class={twMerge('link', p.class)}
+      class={cn('link', p.class)}
       href={p.path}
       target={p.path.startsWith('http') ? '_blank' : '_self'}
       children={p.children}
     />
   );
-}
-export function Btn<
+};
+export const Btn = <
   T extends 'button' | 'link' | 'swap' | 'dropdown' = 'button',
 >(
   p: Partial<
@@ -33,9 +33,9 @@ export function Btn<
       children: JSX.Element;
     }
   >,
-) {
+) => {
   const shared = createMemo(() => ({
-    class: twMerge('btn btn-ghost no-underline', p.class),
+    class: cn('btn no-underline', p.class),
     onClick: p.onClick,
   }));
   const children = () => [p.icon && <Icon children={p.icon} />, p.text];
@@ -58,7 +58,7 @@ export function Btn<
       <label
         {...{
           ...shared(),
-          class: twMerge('swap', shared().class),
+          class: cn('swap', shared().class),
           children: p.children,
         }}
       />
@@ -66,7 +66,7 @@ export function Btn<
   }
   if (p.type === 'dropdown') {
     return (
-      <div class={twMerge('dropdown', p.dropdownClass)}>
+      <div class={cn('dropdown', p.dropdownClass)}>
         <button
           tabindex="0"
           {...{
@@ -83,11 +83,12 @@ export function Btn<
     );
   }
   return `unsupported button type: ${p.type}`;
-}
-export function BtnGroup(p: { items: Props<typeof Btn>[] }) {
+};
+
+export const BtnGroup = (p: { items: ComponentProps<typeof Btn>[] }) => {
   return (
     <div class="flex flex-wrap justify-center md:justify-start gap-3">
       <For each={p.items}>{(e) => <Btn {...e} />}</For>
     </div>
   );
-}
+};

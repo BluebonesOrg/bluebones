@@ -1,4 +1,6 @@
 import { translator } from '@solid-primitives/i18n';
+import { makePersisted } from '@solid-primitives/storage';
+import clsx, { ClassValue } from 'clsx';
 import {
   createEffect,
   createResource,
@@ -8,8 +10,10 @@ import {
   Signal,
 } from 'solid-js';
 import { createStore } from 'solid-js/store';
-import defaultDict from '~/i18n/en.json';
+import { twMerge } from 'tailwind-merge';
+import defaultDict from '~/i18n/zh.json';
 
+export const cn = (...inputs: ClassValue[]) => twMerge(clsx(...inputs));
 export function each<T extends LooseObject>(
   obj: T,
   fn: ObjectIterator<T, void>,
@@ -106,22 +110,19 @@ export const useBreakpoint = (function () {
     };
   };
 })();
-export function useLocalStorage<T>(key: string, defaultValue: T): Signal<T> {
+export const useLocalStorage = <T>(key: string, defaultValue: T): Signal<T> => {
   const v = localStorage.getItem(key);
   const [value, setValue] = createSignal<T>(v ? JSON.parse(v) : defaultValue);
   createEffect(() => {
     localStorage.setItem(key, JSON.stringify(value()));
   });
   return [value, setValue];
-}
+};
 
 // store
-export const [store, setStore] = createStore<{ theme: string; locale: string }>(
-  { theme: 'night', locale: 'en' },
+export const [store, setStore] = makePersisted(
+  createStore({ theme: 'night', locale: 'en' }),
 );
-createEffect(() => {
-  document.documentElement.lang = store.locale;
-});
 
 /**locale @see https://github.com/solidjs-community/solid-primitives/tree/main/packages/i18n */
 type Dict = typeof defaultDict;
